@@ -2,13 +2,13 @@
 
 ## Summary
 
-This PR adds complete, production-ready Rust bindings for the NORM library, enabling Rust developers to use NORM's reliable multicast capabilities with memory safety guarantees and idiomatic Rust patterns.
+This PR adds complete Rust bindings for the NORM library, enabling developers to use NORM's reliable multicast capabilities within the Rust language.
 
 ## What's Added
 
 ### Core Implementation
 - **norm-sys**: Low-level FFI bindings auto-generated via bindgen from `normApi.h`
-- **norm**: Safe, idiomatic Rust wrappers with RAII resource management
+- **norm**: Rust wrappers with RAII resource management
 - **Build Integration**: Seamless integration with NORM's waf build system
 
 ### API Coverage
