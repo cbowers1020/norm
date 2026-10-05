@@ -15,8 +15,8 @@
 // or non-zero on failure. That makes it usable both as a copy-paste reference
 // and as a smoke test:
 //
-//	go run ./examples/service            # default 224.1.2.3:6040
-//	go run ./examples/service 224.1.2.3 7000
+//	go run ./service            # default 224.1.2.3:6040
+//	go run ./service 224.1.2.3 7000
 //
 // Requires the loader path to point at the built libnorm (see src/go/README.md).
 package main

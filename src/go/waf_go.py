@@ -99,3 +99,17 @@ def build_go_bindings(ctx):
         Logs.info('Running Go binding tests')
         if subprocess.call([ctx.env.GO[0], 'test', './...'], env=env, cwd=cwd) != 0:
             ctx.fatal('Go binding tests failed')
+
+    # The examples are a separate module (examples/go) that resolves the binding
+    # via a replace directive; build (and optionally test) them against the same
+    # in-tree libnorm.
+    examples_dir = ctx.path.find_dir('examples/go')
+    if examples_dir:
+        ex_cwd = examples_dir.abspath()
+        Logs.info('Building Go examples in: ' + ex_cwd)
+        if subprocess.call([ctx.env.GO[0], 'build', './...'], env=env, cwd=ex_cwd) != 0:
+            ctx.fatal('Failed to build Go examples')
+        if ctx.env.GO_TEST:
+            Logs.info('Running Go example tests')
+            if subprocess.call([ctx.env.GO[0], 'test', './...'], env=env, cwd=ex_cwd) != 0:
+                ctx.fatal('Go example tests failed')

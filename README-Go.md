@@ -9,7 +9,8 @@ native NORM library via `pkg-config`.
 - `src/go/normsys` — low-level, near 1:1 cgo binding of `include/normApi.h`.
 - `src/go/norm` — idiomatic wrapper (`Instance`/`Session`/`Object`/`Node`, Go
   errors, `io.Reader`/`io.Writer` stream adapters).
-- `src/go/examples` — runnable data/stream/file send/receive programs.
+- `examples/go` — runnable data/stream/file send/receive programs (a separate
+  module, consistent with `examples/python` and `examples/java`).
 
 ## Building
 

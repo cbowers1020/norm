@@ -82,3 +82,24 @@ jobs:
     - name: Integration tests (multicast loopback)
       run: go test -tags norm_integration ./...
       continue-on-error: true
+
+    # The examples are a separate module (examples/go) that resolves the binding
+    # via a replace directive. The exported PKG_CONFIG_PATH/loader env above
+    # applies regardless of working-directory, so these build against the same
+    # in-tree libnorm.
+    - name: Check formatting (examples)
+      working-directory: ./examples/go
+      run: test -z "$(gofmt -l .)" || { echo 'gofmt needed on:'; gofmt -l .; exit 1; }
+
+    - name: Vet (examples)
+      working-directory: ./examples/go
+      run: go vet ./...
+
+    - name: Build (examples)
+      working-directory: ./examples/go
+      run: go build ./...
+
+    - name: Integration tests (examples, multicast loopback)
+      working-directory: ./examples/go
+      run: go test -tags norm_integration ./...
+      continue-on-error: true

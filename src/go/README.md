@@ -310,9 +310,10 @@ case norm.TxObjectPurged:
     sess.ReleasePurged(ev.Object())
 ```
 
-`examples/service` is a complete, dependency-free program implementing exactly
-this pattern (receiver worker + sender with `ReleasePurged`) that self-checks a
-round-trip; run it with `go run ./examples/service`.
+The `service` example is a complete, dependency-free program implementing
+exactly this pattern (receiver worker + sender with `ReleasePurged`) that
+self-checks a round-trip; from the top-level `examples/go` module, run it with
+`go run ./service`.
 
 ## Correctness notes (read before shipping)
 
@@ -346,12 +347,16 @@ round-trip; run it with `go run ./examples/service`.
 
 ## Examples
 
-Each subdirectory under `examples/` is a standalone `main` package:
+The examples live in the repository's top-level `examples/go` module (alongside
+`examples/python` and `examples/java`), resolving this binding via a `replace`
+directive. Each subdirectory there is a standalone `main` package; run them from
+that directory:
 
 ```sh
+cd ../../examples/go
 # terminal 1 (receiver), then terminal 2 (sender)
-go run ./examples/data_recv 224.1.2.3 6003
-go run ./examples/data_send 224.1.2.3 6003
+go run ./data_recv 224.1.2.3 6003
+go run ./data_send 224.1.2.3 6003
 ```
 
 On macOS, same-host multicast loopback may require binding the multicast
